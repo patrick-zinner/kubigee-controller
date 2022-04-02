@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: io.kubigee
+testFramework: junit
+sourceLanguage: kotlin
+buildTool: maven
+features: [annotation-api, app-name, assertj, http-client, jackson-databind, junit, kotlin, kotlin-application, kubernetes-client, log4j2, maven, mockito, netty-server, properties, readme, shade]
