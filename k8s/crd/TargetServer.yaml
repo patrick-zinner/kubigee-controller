@@ -1,0 +1,100 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: targetservers.alpha.kubigee.io
+spec:
+  group: alpha.kubigee.io
+  versions:
+    - name: alpha-0-0-1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              required:
+                - organization
+                - environment
+                - host
+                - port
+                - protocol
+              properties:
+                organization:
+                  type: string
+                  nullable: false
+                environment:
+                  type: string
+                  nullable: false
+                description:
+                  type: string
+                  nullable: true
+                host:
+                  type: string
+                  nullable: false
+                port:
+                  type: integer
+                  nullable: false
+                isEnabled:
+                  type: boolean
+                  nullable: true
+                sSLInfo:
+                  nullable: true
+                  type: object
+                  required:
+                    - enabled
+                  properties:
+                    enabled:
+                      type: boolean
+                      nullable: false
+                    clientAuthEnabled:
+                      type: boolean
+                      nullable: true
+                    keyStore:
+                      type: string
+                      nullable: true
+                    keyAlias:
+                      type: string
+                      nullable: true
+                    trustStore:
+                      type: string
+                      nullable: true
+                    ignoreValidationErrors:
+                      type: boolean
+                      nullable: true
+                    protocols:
+                      type: array
+                      nullable: true
+                      items:
+                        type: string
+                    ciphers:
+                      type: array
+                      nullable: true
+                      items:
+                        type: string
+                    commonName:
+                      type: object
+                      nullable: true
+                      properties:
+                        value:
+                          type: string
+                          nullable: true
+                        wildcardMatch:
+                          type: boolean
+                          nullable: true
+                protocol:
+                  type: string
+                  nullable: false
+                  enum:
+                    - PROTOCOL_UNSPECIFIED
+                    - HTTP
+                    - GRPC
+
+  scope: Namespaced
+  names:
+    plural: targetservers
+    singular: targetserver
+    kind: TargetServer
+    shortNames:
+      - ts
